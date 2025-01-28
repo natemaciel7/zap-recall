@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Deck from "./components/Deck";
 import ProgressBar from "./components/ProgressBar";
-import { GlobalStyle, AppContainer } from "./styles";
+import logo from "./assets/logo.png"; 
+import { GlobalStyle, AppContainer, Logo } from "./styles";
 
 const cards = [
   { id: 1, question: "O que é JSX?", answer: "Uma extensão da linguagem JavaScript" },
@@ -20,7 +21,10 @@ function App() {
   return (
     <AppContainer>
       <GlobalStyle />
+      <header>
+      <Logo src={logo} alt="Logo do Zap Recall" />
       <h1>Zap Recall!</h1>
+      </header>
       <Deck cards={cards} setAnsweredCards={setAnsweredCards} />
       <ProgressBar total={cards.length} answered={answeredCards} />
     </AppContainer>
