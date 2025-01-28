@@ -7,7 +7,7 @@ import iconWrong from "../assets/icone_erro.png";
 import { FlashcardContainer, Front, Back, Button, Icon, StrikethroughText } from "../styles";
 
 function Flashcard({ card, setAnsweredCards }) {
-  const [stage, setStage] = useState("front"); // "front", "question", "answer", "done"
+  const [stage, setStage] = useState("front");
   const [status, setStatus] = useState("");
 
   const handleAnswer = (status) => {
@@ -27,14 +27,14 @@ function Flashcard({ card, setAnsweredCards }) {
 
       {stage === "question" && (
         <Back>
-          <p>{card.question}</p> {/* Garantir que a pergunta apareça aqui */}
+          <p>{card.question}</p> 
           <Icon src={iconVirar} alt="Ícone de virar" onClick={() => setStage("answer")} />
         </Back>
       )}
 
       {stage === "answer" && (
         <Back>
-          <p>{card.answer}</p> {/* Exibir a resposta */}
+          <p>{card.answer}</p>
           <div>
             <Button status="incorrect" onClick={() => handleAnswer("incorrect")}>
               <Icon src={iconWrong} alt="Não lembrei" />

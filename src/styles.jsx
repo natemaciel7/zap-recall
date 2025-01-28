@@ -52,10 +52,6 @@ export const FlashcardContainer = styled.div`
   width: 300px;
   height: 150px;
   position: relative;
-  perspective: 1000px;
-  transform-style: preserve-3d;
-  transform: ${({ stage }) => (stage === "answer" ? "rotateY(180deg)" : "rotateY(0deg)")};
-  transition: transform 0.6s;
   cursor: ${({ stage }) => (stage === "done" ? "default" : "pointer")};
   margin-bottom: 20px;
   background-color: ${({ status }) =>
@@ -69,8 +65,6 @@ export const Front = styled.div`
   width: 100%;
   height: 100%;
   background-color: #FFFFFF;
-  position: absolute;
-  backface-visibility: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,9 +79,6 @@ export const Back = styled.div`
   width: 100%;
   height: 100%;
   background-color: #FFFFD4;
-  position: absolute;
-  backface-visibility: hidden;
-  transform: rotateY(180deg);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -110,8 +101,6 @@ export const Button = styled.button`
     status === "incorrect" ? "#FF3030" :
     status === "partial" ? "#FF922E" :
     "#2FBE34"};
-  transition: background-color 0.3s;
-
   &:hover {
     opacity: 0.9;
   }
