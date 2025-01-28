@@ -1,37 +1,67 @@
 import React, { useState } from "react";
-import setaPlay from "../assets/seta_play.png";
-import setaVirar from "../assets/seta_virar.png";
-import { FlashcardContainer, Front, Back, Button, Icon } from "../styles";
+import iconPlay from "../assets/seta_play.png";
+import iconVirar from "../assets/seta_virar.png";
+import iconCorrect from "../assets/icone_certo.png";
+import iconPartial from "../assets/icone_quase.png";
+import iconWrong from "../assets/icone_erro.png";
+import { FlashcardContainer, Front, Back, Button, Icon, StrikethroughText } from "../styles";
 
 function Flashcard({ card, setAnsweredCards }) {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [isAnswered, setIsAnswered] = useState(false);
+  const [stage, setStage] = useState("front"); // "front", "question", "answer", "done"
   const [status, setStatus] = useState("");
 
   const handleAnswer = (status) => {
     setStatus(status);
-    setIsAnswered(true);
+    setStage("done");
     setAnsweredCards((prev) => prev + 1);
   };
 
   return (
-    <FlashcardContainer isFlipped={isFlipped} isAnswered={isAnswered} status={status}>
-      <Front onClick={() => setIsFlipped(!isFlipped)}>
-        <span>Pergunta {card.id}</span>
-        <Icon src={setaPlay} alt="Ícone de play" />
-      </Front>
-      <Back>
-        <p>{card.question}</p>
-        <p>{card.answer}</p>
-        {!isAnswered && (
+    <FlashcardContainer stage={stage} status={status}>
+      {stage === "front" && (
+        <Front onClick={() => setStage("question")}>
+          <span>Pergunta {card.id}</span>
+          <Icon src={iconPlay} alt="Ícone de play" />
+        </Front>
+      )}
+
+      {stage === "question" && (
+        <Back>
+          <p>{card.question}</p> {/* Garantir que a pergunta apareça aqui */}
+          <Icon src={iconVirar} alt="Ícone de virar" onClick={() => setStage("answer")} />
+        </Back>
+      )}
+
+      {stage === "answer" && (
+        <Back>
+          <p>{card.answer}</p> {/* Exibir a resposta */}
           <div>
-            <Button onClick={() => handleAnswer("incorrect")}>Não lembrei</Button>
-            <Button onClick={() => handleAnswer("partial")}>Quase não lembrei</Button>
-            <Button onClick={() => handleAnswer("correct")}>Zap!</Button>
-            <Icon src={setaVirar} alt="Ícone de virar" onClick={() => setIsFlipped(!isFlipped)} />
+            <Button status="incorrect" onClick={() => handleAnswer("incorrect")}>
+              <Icon src={iconWrong} alt="Não lembrei" />
+              Não lembrei
+            </Button>
+            <Button status="partial" onClick={() => handleAnswer("partial")}>
+              <Icon src={iconPartial} alt="Quase não lembrei" />
+              Quase lembrei
+            </Button>
+            <Button status="correct" onClick={() => handleAnswer("correct")}>
+              <Icon src={iconCorrect} alt="Zap!" />
+              Zap!
+            </Button>
           </div>
-        )}
-      </Back>
+        </Back>
+      )}
+
+      {stage === "done" && (
+        <Front>
+          <StrikethroughText>{card.question}</StrikethroughText>
+          <Icon src={
+            status === "incorrect" ? iconWrong : 
+            status === "partial" ? iconPartial : 
+            iconCorrect
+          } alt="Ícone de status" />
+        </Front>
+      )}
     </FlashcardContainer>
   );
 }
