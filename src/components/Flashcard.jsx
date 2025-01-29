@@ -17,22 +17,22 @@ function Flashcard({ card, setAnsweredCards }) {
   };
 
   return (
-    <FlashcardContainer stage={stage} status={status}>
-      {stage === "front" && (
+    <FlashcardContainer stage={stage}>
+      {stage === "front" && ( 
         <Front onClick={() => setStage("question")}>
           <span>Pergunta {card.id}</span>
           <Icon src={iconPlay} alt="Ícone de play" />
         </Front>
       )}
 
-      {stage === "question" && (
+      {stage === "question" && ( 
         <Back>
-          <p>{card.question}</p> 
+          <p>{card.question}</p>
           <Icon src={iconVirar} alt="Ícone de virar" onClick={() => setStage("answer")} />
         </Back>
       )}
 
-      {stage === "answer" && (
+      {stage === "answer" && ( 
         <Back>
           <p>{card.answer}</p>
           <div>
@@ -52,14 +52,17 @@ function Flashcard({ card, setAnsweredCards }) {
         </Back>
       )}
 
-      {stage === "done" && (
+      {stage === "done" && ( 
         <Front>
           <StrikethroughText>{card.question}</StrikethroughText>
-          <Icon src={
-            status === "incorrect" ? iconWrong : 
-            status === "partial" ? iconPartial : 
-            iconCorrect
-          } alt="Ícone de status" />
+          <Icon
+            src={
+              status === "incorrect" ? iconWrong : 
+              status === "partial" ? iconPartial : 
+              iconCorrect
+            }
+            alt="Ícone de status"
+          />
         </Front>
       )}
     </FlashcardContainer>

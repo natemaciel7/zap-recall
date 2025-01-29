@@ -23,7 +23,7 @@ function App() {
       <GlobalStyle />
       <header>
       <Logo src={logo} alt="Logo do Zap Recall" />
-      <h1>Zap Recall!</h1>
+      <h1>Zap Recall</h1>
       </header>
       <Deck cards={cards} setAnsweredCards={setAnsweredCards} />
       <ProgressBar total={cards.length} answered={answeredCards} />

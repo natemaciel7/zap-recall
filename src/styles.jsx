@@ -1,5 +1,8 @@
 import styled, { createGlobalStyle } from "styled-components";
+
 export const GlobalStyle = createGlobalStyle`
+  @import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;600&family=Righteous&display=swap');
+
   body {
     font-family: 'Recursive', sans-serif;
     background-color: #FB6B6B;
@@ -8,20 +11,26 @@ export const GlobalStyle = createGlobalStyle`
     color: #333;
   }
 
-  h1 {  
-    font-family: 'Righteous', cursive;
+  h1 {
+    font-family: 'Righteous', cursive;  
     font-size: 36px;
     color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  button, p, span, div {
+    font-family: 'Recursive', sans-serif; 
   }
 `;
 
 export const Header = styled.header`
-display: flex;
-align-items: center; 
-gap: 10px; 
-margin-bottom: 20px; 
-flex-direction: row;
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;  
+  margin-bottom: 20px;
 `;
 
 export const AppContainer = styled.div`
@@ -36,71 +45,92 @@ export const AppContainer = styled.div`
 
 export const Logo = styled.img`
   width: 50px;
-  height: auto;  
-  margin-bottom: 20px;
+  height: auto;
 `;
 
 export const DeckContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   margin-top: 20px;
 `;
 
 export const FlashcardContainer = styled.div`
-  width: 300px;
-  height: 150px;
-  position: relative;
-  cursor: ${({ stage }) => (stage === "done" ? "default" : "pointer")};
-  margin-bottom: 20px;
+  width: 270px; 
   background-color: ${({ status }) =>
     status === "incorrect" ? "#FF3030" :
     status === "partial" ? "#FF922E" :
     status === "correct" ? "#2FBE34" :
     "#FFFFFF"};
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: ${({ stage }) => (stage === "done" ? "default" : "pointer")};
 `;
 
 export const Front = styled.div`
   width: 100%;
-  height: 100%;
-  background-color: #FFFFFF;
+  min-height: 60px; 
+  background-color: #FFFFFF; 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 10px;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   color: #333;
 `;
 
 export const Back = styled.div`
   width: 100%;
-  height: 100%;
-  background-color: #FFFFD4;
+  min-height: 130px; 
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  border-radius: 5px;
+  justify-content: space-between;
+  padding: 20px; 
+  font-size: 14px;
+  color: #333;
+  background-color: #FFFFD4;
+  border-radius: 8px;
+  text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 10px;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  flex-wrap: nowrap; 
+  width: 100%;
+  gap: 6px; 
 `;
 
 export const Button = styled.button`
-  margin: 5px;
-  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 85px; 
+  height: 40px; 
+  padding: 5px; 
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
+  font-size: 11px;
   font-weight: bold;
-  color: #FFFFFF;
+  cursor: pointer;
+  color: white;
   background-color: ${({ status }) =>
     status === "incorrect" ? "#FF3030" :
     status === "partial" ? "#FF922E" :
     "#2FBE34"};
+
   &:hover {
     opacity: 0.9;
   }
@@ -110,7 +140,6 @@ export const Icon = styled.img`
   width: 20px;
   height: 20px;
   cursor: pointer;
-  margin-left: 10px;
 `;
 
 export const ProgressContainer = styled.div`
@@ -122,6 +151,7 @@ export const ProgressContainer = styled.div`
   padding: 10px 20px;
   border-radius: 5px;
 `;
+
 export const StrikethroughText = styled.span`
   text-decoration: line-through;
   font-size: 16px;
