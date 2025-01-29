@@ -5,18 +5,17 @@ export const GlobalStyle = createGlobalStyle`
 
   body {
     font-family: 'Recursive', sans-serif;
-    background-color: #FB6B6B;
     margin: 0;
     padding: 0;
     color: #333;
+    
   }
 
   h1 {
     font-family: 'Righteous', cursive;  
     font-size: 36px;
     color: #FFFFFF;
-    display: flex;
-    align-items: center;
+
     gap: 10px;
   }
 
@@ -25,22 +24,19 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
-export const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;  
-  margin-bottom: 20px;
-`;
 
 export const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  min-height: 100vh;
-  padding: 20px;
+ width: 100%;
+  margin: auto;
+  padding: 16px;
+  max-width: 400px; 
   background-color: #FB6B6B;
+
+   @media (max-width: 500px) {
+    max-width: 100%; 
+    padding: 12px;
+  }
+
 `;
 
 export const Logo = styled.img`
@@ -57,19 +53,33 @@ export const DeckContainer = styled.div`
 `;
 
 export const FlashcardContainer = styled.div`
+
   width: 270px; 
-  background-color: ${({ status }) =>
-    status === "incorrect" ? "#FF3030" :
-    status === "partial" ? "#FF922E" :
-    status === "correct" ? "#2FBE34" :
-    "#FFFFFF"};
+  background-color: #FFFFFF;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   cursor: ${({ stage }) => (stage === "done" ? "default" : "pointer")};
+
+   @media (max-width: 500px) {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  
+
+   span {
+    font-weight: bold;
+    text-decoration: ${({ status }) => (status ? "line-through" : "none")};
+    color: ${({ status }) =>
+      status === "incorrect" ? "#FF3030" :  
+      status === "partial" ? "#FF922E" :   
+      status === "correct" ? "#2FBE34" : 
+      "#333"}; 
+  }
 `;
 
 export const Front = styled.div`
@@ -112,6 +122,14 @@ export const ButtonContainer = styled.div`
   gap: 6px; 
 `;
 
+export const Header = styled.div`
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  gap: 10px; 
+  padding: 20px;
+`;
+
 export const Button = styled.button`
   display: flex;
   align-items: center;
@@ -143,13 +161,12 @@ export const Icon = styled.img`
 `;
 
 export const ProgressContainer = styled.div`
-  margin-top: 20px;
+padding: 50px;
+  margin-top: 40px;
   font-size: 18px;
   font-weight: bold;
-  color: #FFFFFF;
-  background-color: rgba(255, 255, 255, 0.2);
-  padding: 10px 20px;
-  border-radius: 5px;
+  background-color: #FFFFFF;
+  color: black;
 `;
 
 export const StrikethroughText = styled.span`

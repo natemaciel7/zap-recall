@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ButtonContainer } from "../styles";
 import iconPlay from "../assets/seta_play.png";
 import iconVirar from "../assets/seta_virar.png";
 import iconCorrect from "../assets/icone_certo.png";
@@ -17,25 +18,25 @@ function Flashcard({ card, setAnsweredCards }) {
   };
 
   return (
-    <FlashcardContainer stage={stage}>
-      {stage === "front" && ( 
+    <FlashcardContainer stage={stage} status={status}>
+      {stage === "front" && (
         <Front onClick={() => setStage("question")}>
           <span>Pergunta {card.id}</span>
           <Icon src={iconPlay} alt="Ícone de play" />
         </Front>
       )}
 
-      {stage === "question" && ( 
+      {stage === "question" && (
         <Back>
           <p>{card.question}</p>
           <Icon src={iconVirar} alt="Ícone de virar" onClick={() => setStage("answer")} />
         </Back>
       )}
 
-      {stage === "answer" && ( 
+      {stage === "answer" && (
         <Back>
           <p>{card.answer}</p>
-          <div>
+          <ButtonContainer>
             <Button status="incorrect" onClick={() => handleAnswer("incorrect")}>
               <Icon src={iconWrong} alt="Não lembrei" />
               Não lembrei
@@ -48,13 +49,13 @@ function Flashcard({ card, setAnsweredCards }) {
               <Icon src={iconCorrect} alt="Zap!" />
               Zap!
             </Button>
-          </div>
+          </ButtonContainer>
         </Back>
       )}
 
-      {stage === "done" && ( 
+      {stage === "done" && (
         <Front>
-          <StrikethroughText>{card.question}</StrikethroughText>
+          <span>Pergunta {card.id}</span>
           <Icon
             src={
               status === "incorrect" ? iconWrong : 
